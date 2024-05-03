@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://be2mo8fnvkkqc"]
+
+[ext_resource type="Script" path="res://scripts/ui.gd" id="1_fkim6"]
+[ext_resource type="FontFile" uid="uid://jvks7ddw8xlo" path="res://assets/fonts/kongtext.ttf" id="1_iqtuy"]
+[ext_resource type="LabelSettings" uid="uid://mmm267ink4sa" path="res://scenes/ui.tres" id="2_tceer"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mag6g"]
+bg_color = Color(0, 0, 0, 0.25098)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0, 0, 0, 0.25098)
+border_blend = true
+corner_radius_bottom_right = 10
+
+[sub_resource type="Theme" id="Theme_hxdnh"]
+Label/fonts/font = ExtResource("1_iqtuy")
+Label/styles/normal = SubResource("StyleBoxFlat_mag6g")
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource("1_fkim6")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+offset_right = 148.0
+offset_bottom = 36.0
+theme = SubResource("Theme_hxdnh")
+text = "Ammo: 24"
+label_settings = ExtResource("2_tceer")

@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://bbe4aocxep877"]
+
+[ext_resource type="Script" path="res://scripts/bullet.gd" id="1_4a8yv"]
+[ext_resource type="Texture2D" uid="uid://dhdn6wmpjal2u" path="res://assets/tilemap.png" id="1_bjofc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3ladg"]
+size = Vector2(11, 6)
+
+[node name="Bullet" type="Area2D"]
+collision_layer = 8
+collision_mask = 34
+input_pickable = false
+gravity_space_override = 1
+script = ExtResource("1_4a8yv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_bjofc")
+region_enabled = true
+region_rect = Rect2(64, 64, 16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_3ladg")
+
+[node name="DeathTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="ParticleImpactPosition" type="Marker2D" parent="."]
+position = Vector2(5, 0)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+scale = Vector2(0.6, 0.3)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

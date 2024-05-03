@@ -1,0 +1,13 @@
+res://assets/themes/new_theme.tres::663e9285de47954402e95f042d4e019c::1714655233::res://.godot/exported/133200997/export-7599380abe0dfe101192fb4fabadcedb-new_theme.res
+res://scenes/levels/level_1.tscn::2ba65b4840be9bdddd315981d7662b60::1714671772::res://.godot/exported/133200997/export-446b1ed11cc7129b20b35ff4df2b3752-level_1.scn
+res://scenes/bullet.tscn::4fd58f93ca92d91c833c4a6638045f8a::1714653572::res://.godot/exported/133200997/export-6d8e6ff1e6f20a36e0402d27c623c86c-bullet.scn
+res://scenes/bullet_explosion.tscn::d5936350cd2a1cd1df5a4d1959eb31d2::1714653555::res://.godot/exported/133200997/export-afdafb9ea4f16dc09708c9ea40a33b30-bullet_explosion.scn
+res://scenes/game.tscn::abd4d1a82a710ee53d059cd3df0ed49b::1714671772::res://.godot/exported/133200997/export-c2a7af834e91ff64325daddf58e45dc0-game.scn
+res://scenes/move_platform.tscn::0e443cbeacd91f9b74f0c9328ba61644::1714668129::res://.godot/exported/133200997/export-f6bfd6ad2e7cbec0e8d98874b706a060-move_platform.scn
+res://scenes/player.tscn::9a19e54621f170c71e4509c1c21a82c1::1714671772::res://.godot/exported/133200997/export-234fb6894ec6226e856ab7f825500d3d-player.scn
+res://scenes/death_zone.tscn::321def970e229e1292d50c85bd807445::1714671780::res://.godot/exported/133200997/export-d0ec36877fe2f9185d0690c63c89487a-death_zone.scn
+res://scenes/sky.tscn::bdd2c0f4b381a3cb7ea2ece91fbd221b::1714535237::res://.godot/exported/133200997/export-c9f9d78f663c26f054eb95050231df84-sky.scn
+res://scenes/ui.tres::bf173b6c94acac94e57258ebe92bbc1f::1714667913::res://.godot/exported/133200997/export-c66d9ac480f046e07b5027900bdd7320-ui.res
+res://scenes/ui.tscn::4b00db267f4fe1d9143d37e736e5db1f::1714660121::res://.godot/exported/133200997/export-9211dc52ac9df169ba4fe77cbc1dc833-ui.scn
+res://scenes/weapon.tscn::bf272594e942f6aa4acde209ed60de78::1714671772::res://.godot/exported/133200997/export-8f158e3922ca6614c1d0ef7d88ac4bb5-weapon.scn
+res://debug.tscn::801781bf1747d287593235f71638964a::1714666781::res://.godot/exported/133200997/export-b83e07efb4fa7ebbb88a74f9f5789ffb-debug.scn

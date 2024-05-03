@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://cuxp8vs6rijj7"]
+
+[ext_resource type="Script" path="res://scripts/bullet_explosion.gd" id="2_n4ute"]
+[ext_resource type="AudioStream" uid="uid://cuodfohhlqeqh" path="res://assets/audio/bulletImpact.mp3" id="2_nbxu5"]
+
+[sub_resource type="Gradient" id="Gradient_vqoth"]
+colors = PackedColorArray(0.909804, 0.854902, 0.14902, 0.72549, 0.909804, 0.298039, 0.14902, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8jf46"]
+gradient = SubResource("Gradient_vqoth")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gyavc"]
+particle_flag_disable_z = true
+emission_shape = 4
+emission_point_count = 1
+direction = Vector3(0, 0, 0)
+spread = 32.314
+initial_velocity_max = 45.55
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_8jf46")
+turbulence_enabled = true
+turbulence_noise_speed_random = 3.99
+turbulence_influence_min = 0.0
+turbulence_influence_max = 0.0
+
+[node name="BulletExplosion" type="GPUParticles2D"]
+amount = 10
+amount_ratio = 0.937
+process_material = SubResource("ParticleProcessMaterial_gyavc")
+lifetime = 0.5
+explosiveness = 1.0
+script = ExtResource("2_n4ute")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="ImpactSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_nbxu5")
+pitch_scale = 4.1
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

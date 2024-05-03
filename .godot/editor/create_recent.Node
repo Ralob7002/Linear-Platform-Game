@@ -1,0 +1,15 @@
+CollisionShape2D
+Area2D
+VisibleOnScreenNotifier2D
+AudioStreamPlayer2D
+AudioStreamPlayer
+VisibleOnScreenEnabler2D
+AudioListener2D
+Node2D
+PointLight2D
+DirectionalLight2D
+LightOccluder2D
+AnimationPlayer
+Sprite2D
+TileMap
+Timer
