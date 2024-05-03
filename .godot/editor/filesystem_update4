@@ -1,5 +1,16 @@
 res://scenes/levels/level_1.tscn
 res://scenes/ui.tres
 res://scenes/player.gdshader
+res://CHANGES.md
 res://scenes/move_platform.tscn
 res://scenes/player.tscn
+res://scripts/level_1.gd
+res://scripts/player.gd
+res://scripts/game.gd
+res://scenes/game.tscn
+res://scenes/bullet.tscn
+res://scripts/bullet.gd
+res://scenes/bullet_explosion.tscn
+res://scripts/bullet_explosion.gd
+res://scenes/death_zone.tscn
+res://scripts/death_zone.gd

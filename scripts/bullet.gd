@@ -14,19 +14,21 @@ var ON_SCREEN: bool = true
 
 
 func _ready():
-	$DeathTimer.start()
+	# Time for the bullet to self-destruct.
+	$SelfDestructionTimer.start()
+
 
 func _physics_process(delta):
+	# Move the bullet on the x-axis.
 	position.x += direction * speed * delta
-	
-	print(ON_SCREEN)
 
 
 func _on_body_entered(_body):
+	# Adds impact particle at bullet impact site.
 	var new_explosion = explosion.instantiate()
-	new_explosion.position = $ParticleImpactPosition.global_position
-	new_explosion.ON_SCREEN = ON_SCREEN
-	get_parent().add_child(new_explosion)
+	new_explosion.position = $ImpactParticlePosition.global_position
+	new_explosion.ON_SCREEN = ON_SCREEN # If the bullet is on the visible screen.
+	get_parent().add_child(new_explosion) # Adds impact particle at current level.
 	queue_free()
 
 

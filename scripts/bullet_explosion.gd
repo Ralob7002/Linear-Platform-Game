@@ -8,10 +8,13 @@ var ON_SCREEN: bool
   
 
 func _ready():
-	process_material.direction = Vector3(-1, 0,0)
-	$Timer.wait_time = lifetime
-	$Timer.start()
+	# Synchronizes the timer with the particle’s lifetime.
+	$ParticleDeathTime.wait_time = lifetime 
+	$ParticleDeathTime.start()
+	
+	# Start the particle.
 	emitting = true
+	
 	if ON_SCREEN:
 		$ImpactSound.play()
 

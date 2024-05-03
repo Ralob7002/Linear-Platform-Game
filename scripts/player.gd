@@ -9,7 +9,7 @@ const max_speed = 100
 const jump_speed = -300
 const max_jump_speed = -300
 const gravity = 980
-const max_platform_distance = 53
+const max_platform_distance = 30
 
 # Variables.
 var player_direction = 1
@@ -23,6 +23,7 @@ var IS_SHOOTING: bool
 var CAN_COYOTE_TIMER: bool = false
 var CAN_SHOOT: bool = true
 var TAKE_AMMO: bool
+var ON_PLATFORM: bool
 
 # Player signals.
 signal dropped_gun(direction)
@@ -53,6 +54,9 @@ func _physics_process(delta):
 	
 	# Move the player.
 	move_and_slide()
+	
+	if velocity.y < max_jump_speed:
+		velocity.y = max_jump_speed
 
 
 func movement(_delta):
@@ -135,18 +139,6 @@ func weapon_system():
 				shoot.emit(player_direction)
 		else:
 			IS_SHOOTING = false
-
-
-func platformChecker(_delta):
-	if $PlatformChecker.get_collider():
-		var body = $PlatformChecker.get_collider()
-		var current_distance = body.position.y - position.y
-		
-		if current_distance > max_platform_distance and velocity.y < max_jump_speed:
-			velocity.y = -300
-		
-		if current_distance > _max_distance:
-			_max_distance = current_distance
 
 
 func checkFlashVisibility(IS_VISIBLE):

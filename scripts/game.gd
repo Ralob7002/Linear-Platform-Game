@@ -6,32 +6,32 @@ var rifle: PackedScene = preload("res://scenes/weapon.tscn")
 var bullet: PackedScene = preload("res://scenes/bullet.tscn")
 
 # Variablesl.
-var up_force = -50
+var up_drop_force # -200 or -300
 var max_drop_force = 200
 var min_drop_force = 20
 var drop_force = min_drop_force
 
 
-func _physics_process(delta):
-	$Player.platformChecker(delta)
-
-
 func _process(delta):
-	# Toggle fullscreen
+	# switch between fullscreen and windowed.
 	if Input.is_action_just_pressed("fullscreen"):
 		if DisplayServer.window_get_mode() == 0:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 		else:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 			
-	# Drop force
+	# If the player is walking, the "up_drop_force" will be greater, 
+	# preventing him from picking up the weapon immediately after dropping.
 	if $Player.IS_MOVING:
-		up_force = -300
+		up_drop_force = -300
 	else:
-		up_force = -200
+		up_drop_force = -200
 	
+	# Accumulates "drop_force" while pressing the drop action.
 	if Input.is_action_pressed("drop_weapon") and Player.WITH_WEAPON:
 		drop_force += 200 * delta
+		
+		# Limits the "drop_force".
 		if drop_force > max_drop_force:
 			drop_force = max_drop_force
 			
@@ -46,7 +46,7 @@ func _on_player_dropped_gun(direction):
 	dropped_weapon.position.y = $Player.position.y
 	
 	# Apply drop force on dropped weapon. 
-	dropped_weapon.apply_impulse(Vector2(drop_force * direction, up_force))
+	dropped_weapon.apply_impulse(Vector2(drop_force * direction, up_drop_force))
 	
 	# Update ammo amount of weapon.
 	dropped_weapon.ammo = Player.ammo

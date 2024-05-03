@@ -31,11 +31,11 @@ lifetime = 0.5
 explosiveness = 1.0
 script = ExtResource("2_n4ute")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="ParticleDeathTime" type="Timer" parent="."]
 one_shot = true
 
 [node name="ImpactSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_nbxu5")
 pitch_scale = 4.1
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="ParticleDeathTime" to="." method="_on_timer_timeout"]
