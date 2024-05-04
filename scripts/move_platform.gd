@@ -36,16 +36,22 @@ var CARRYING_BODY: bool = false
 @export var targetPitch: float = 1
 @export var beginPitch: float = 1
 
+# References.
+@onready var beginPositionMarker = $BeginPositionMarker
+@onready var targetPositionMarker = $TargetPositionMarker
+@onready var collisionShape2D = $CollisionShape2D
+@onready var movingSound = $MoveSound
+
 
 func _ready():
 	# Setup position markers.
 	if showPositions or get_tree().debug_collisions_hint:
-		$BeginPositionMarker.visible = true
-		$TargetPositionMarker.visible = true
+		beginPositionMarker.visible = true
+		targetPositionMarker.visible = true
 	
-	$BeginPositionMarker.global_position = beginPosition
-	$TargetPositionMarker.global_position = beginPosition + targetPosition
-	$CollisionShape2D.one_way_collision = onWayCollision
+	beginPositionMarker.global_position = beginPosition
+	targetPositionMarker.global_position = beginPosition + targetPosition
+	collisionShape2D.one_way_collision = onWayCollision
 	
 	# Begin Movement.
 	if targetStart == "auto":
@@ -54,8 +60,8 @@ func _ready():
 
 
 func _process(_delta):
-	$BeginPositionMarker.global_position = beginPosition
-	$TargetPositionMarker.global_position = beginPosition + targetPosition
+	beginPositionMarker.global_position = beginPosition
+	targetPositionMarker.global_position = beginPosition + targetPosition
 	
 	if beginStart == "body_exited" and ON_TARGET and not CARRYING_BODY and not TO_BEGIN and not TO_TARGET:
 		toBegin()
@@ -95,8 +101,8 @@ func moveSound(pitch, direction):
 	
 	if ON_SCREEN:
 		if playTarget or playBegin:
-			$MoveSound.pitch_scale = pitch
-			$MoveSound.play()
+			movingSound.pitch_scale = pitch
+			movingSound.play()
 
 
 func _on_visible_on_screen_notifier_2d_screen_entered():

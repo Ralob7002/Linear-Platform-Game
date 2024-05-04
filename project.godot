@@ -16,7 +16,7 @@ config/features=PackedStringArray("4.2", "Mobile")
 
 [autoload]
 
-Player="*res://gameData/global-player.gd"
+Player="*res://gameData/global_player.gd"
 
 [display]
 

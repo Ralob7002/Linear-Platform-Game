@@ -1,5 +1,8 @@
 extends Area2D
 
+# References
+@onready var restartTime = $RestartTime
+
 
 func _on_body_entered(body):
 	# Checks whether the player has entered the death zone.
@@ -7,7 +10,7 @@ func _on_body_entered(body):
 		var tween = create_tween()
 		tween.tween_property(body, "modulate:a", 0, 0.3) # Fade effect.
 		tween.tween_callback(func():
-			$RestartTime.start())
+			restartTime.start())
 	
 	# Checks whether an item has entered the death zone.
 	elif body.collision_layer == 4: # Item layer.

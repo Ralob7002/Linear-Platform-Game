@@ -1,0 +1,150 @@
+[gd_scene load_steps=15 format=3 uid="uid://cplln8503x1tl"]
+
+[ext_resource type="Script" path="res://scripts/weapon.gd" id="1_dc4mm"]
+[ext_resource type="Texture2D" uid="uid://dhdn6wmpjal2u" path="res://assets/tilemap.png" id="2_lhoti"]
+[ext_resource type="Texture2D" uid="uid://3hg11lnqe3nc" path="res://assets/Tiles/tile_0050.png" id="3_tq2fd"]
+[ext_resource type="AudioStream" uid="uid://dcwyneoe55m5i" path="res://assets/audio/break_weapon.mp3" id="4_0ey3b"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0p5mw"]
+friction = 0.1
+bounce = 0.1
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1mtj6"]
+radius = 1.5
+height = 10.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8xc7k"]
+size = Vector2(10, 4)
+
+[sub_resource type="Animation" id="Animation_4mgqn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_5rxlm"]
+resource_name = "idle"
+loop_mode = 2
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, -2),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.2, 1.2)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fgu7k"]
+_data = {
+"RESET": SubResource("Animation_4mgqn"),
+"idle": SubResource("Animation_5rxlm")
+}
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_k28ij"]
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_m5m18"]
+_data = [Vector2(0.44186, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_yofgm"]
+curve = SubResource("Curve_m5m18")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_iao05"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(16, 1, 1)
+angle_min = -60.0
+angle_max = 75.0
+direction = Vector3(0, -1, 0)
+spread = 60.0
+flatness = 0.873
+initial_velocity_min = 200.0
+initial_velocity_max = 200.0
+gravity = Vector3(0, 500, 0)
+alpha_curve = SubResource("CurveTexture_yofgm")
+anim_offset_max = 1.0
+
+[node name="Weapon" type="RigidBody2D"]
+collision_layer = 4
+collision_mask = 38
+physics_material_override = SubResource("PhysicsMaterial_0p5mw")
+gravity_scale = 0.8
+can_sleep = false
+continuous_cd = 1
+script = ExtResource("1_dc4mm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_lhoti")
+region_enabled = true
+region_rect = Rect2(0, 80, 16, 16)
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_1mtj6")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 35
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_8xc7k")
+debug_color = Color(0, 0.6, 0.701961, 0.419608)
+metadata/_edit_lock_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_fgu7k")
+}
+speed_scale = 2.0
+
+[node name="BreakParticles" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_k28ij")
+emitting = false
+amount = 5
+process_material = SubResource("ParticleProcessMaterial_iao05")
+texture = ExtResource("3_tq2fd")
+one_shot = true
+explosiveness = 1.0
+
+[node name="SelfDestructTimer" type="Timer" parent="."]
+
+[node name="BreakSoundEffect" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_0ey3b")
+volume_db = -10.0
+pitch_scale = 4.5
+panning_strength = 1.5
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="SelfDestructTimer" to="." method="_on_self_destruct_timeout"]

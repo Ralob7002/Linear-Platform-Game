@@ -1,11 +1,11 @@
 [gd_scene load_steps=9 format=3 uid="uid://danksh20lmd8b"]
 
-[ext_resource type="PackedScene" uid="uid://jywlumyl00m0" path="res://scenes/game.tscn" id="1_os74a"]
+[ext_resource type="PackedScene" uid="uid://jywlumyl00m0" path="res://scenes/levels/game.tscn" id="1_os74a"]
 [ext_resource type="Script" path="res://scripts/level_1.gd" id="2_be7yt"]
-[ext_resource type="PackedScene" uid="uid://cplln8503x1tl" path="res://scenes/weapon.tscn" id="5_epuq7"]
+[ext_resource type="PackedScene" uid="uid://cplln8503x1tl" path="res://scenes/items/weapon.tscn" id="5_epuq7"]
 [ext_resource type="Texture2D" uid="uid://dhdn6wmpjal2u" path="res://assets/tilemap.png" id="5_p771s"]
-[ext_resource type="PackedScene" uid="uid://c4rd6vvu0h3uc" path="res://scenes/death_zone.tscn" id="7_5ld1o"]
-[ext_resource type="PackedScene" uid="uid://cqtv4hdnue4nu" path="res://scenes/move_platform.tscn" id="7_f5lrt"]
+[ext_resource type="PackedScene" uid="uid://c4rd6vvu0h3uc" path="res://scenes/zones/death_zone.tscn" id="7_5ld1o"]
+[ext_resource type="PackedScene" uid="uid://cqtv4hdnue4nu" path="res://scenes/objects/move_platform.tscn" id="7_f5lrt"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_aixlu"]
 texture = ExtResource("5_p771s")

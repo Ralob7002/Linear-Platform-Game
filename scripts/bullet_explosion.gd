@@ -5,18 +5,22 @@ var direction
 
 # States.
 var ON_SCREEN: bool
+
+# References.
+@onready var particleDeathTime = $ParticleDeathTime
+@onready var impactSound = $ImpactSound
   
 
 func _ready():
 	# Synchronizes the timer with the particle’s lifetime.
-	$ParticleDeathTime.wait_time = lifetime 
-	$ParticleDeathTime.start()
+	particleDeathTime.wait_time = lifetime 
+	particleDeathTime.start()
 	
 	# Start the particle.
 	emitting = true
 	
 	if ON_SCREEN:
-		$ImpactSound.play()
+		impactSound.play()
 
 
 func _on_timer_timeout():
