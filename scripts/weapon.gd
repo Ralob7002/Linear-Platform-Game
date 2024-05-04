@@ -34,7 +34,7 @@ func _process(_delta):
 			Player.ammo += ammo
 			current_body.get_node("Audio/GetAmmoSound").play()
 			queue_free()
-		elif not current_body.WITH_WEAPON:
+		elif not Player.WITH_WEAPON:
 			getWeapon(current_body)
 
 

@@ -1,7 +1,0 @@
-[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://mmm267ink4sa"]
-
-[ext_resource type="FontFile" uid="uid://jvks7ddw8xlo" path="res://assets/fonts/kongtext.ttf" id="1_6eipg"]
-
-[resource]
-font = ExtResource("1_6eipg")
-font_size = 32

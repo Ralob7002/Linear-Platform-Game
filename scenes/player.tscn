@@ -462,14 +462,17 @@ wait_time = 0.2
 one_shot = true
 
 [node name="LeftShootPosition" type="Marker2D" parent="."]
+visible = false
 position = Vector2(-8, -1)
 metadata/_edit_lock_ = true
 
 [node name="RightShootPosition" type="Marker2D" parent="."]
+visible = false
 position = Vector2(8, -1)
 metadata/_edit_lock_ = true
 
 [node name="Label" type="Label" parent="."]
+visible = false
 offset_left = -35.0
 offset_top = -21.0
 offset_right = 37.0
@@ -477,6 +480,7 @@ offset_bottom = -12.0
 theme = SubResource("Theme_0y08o")
 text = "Take Ammo"
 label_settings = SubResource("LabelSettings_3a40e")
+metadata/_edit_lock_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -486,6 +490,8 @@ autoplay = "idle"
 speed_scale = 1.7
 
 [node name="Audio" type="Node2D" parent="."]
+visible = false
+metadata/_edit_lock_ = true
 
 [node name="ShootSound" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("4_xtd1c")
@@ -506,7 +512,7 @@ stream = ExtResource("12_om4o7")
 volume_db = -10.0
 pitch_scale = 2.0
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Audio"]
+[node name="JumpSound" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("13_e15o1")
 volume_db = -5.0
 

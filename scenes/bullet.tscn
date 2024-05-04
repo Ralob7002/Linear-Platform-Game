@@ -13,6 +13,12 @@ input_pickable = false
 gravity_space_override = 1
 script = ExtResource("1_4a8yv")
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_bjofc")
+region_enabled = true
+region_rect = Rect2(64, 64, 16, 16)
+metadata/_edit_lock_ = true
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_3ladg")
@@ -20,12 +26,6 @@ metadata/_edit_lock_ = true
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 scale = Vector2(0.6, 0.3)
-metadata/_edit_lock_ = true
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_bjofc")
-region_enabled = true
-region_rect = Rect2(64, 64, 16, 16)
 metadata/_edit_lock_ = true
 
 [node name="SelfDestructionTimer" type="Timer" parent="."]

@@ -51,7 +51,7 @@ func _on_player_dropped_gun(direction):
 	# Update ammo amount of weapon.
 	dropped_weapon.ammo = Player.ammo
 	
-	# Add dropped weapon on game.
+	# Add dropped weapon on current scene.
 	$Items.add_child(dropped_weapon) 
 	Player.ammo = 0
 	

@@ -1,29 +1,32 @@
 extends CharacterBody2D
 
-# Debug.
-var _max_distance = 0
-
 # Constants.
 const speed = 100
-const max_speed = 100
 const jump_speed = -300
 const max_jump_speed = -300
 const gravity = 980
-const max_platform_distance = 30
 
 # Variables.
-var player_direction = 1
+var player_direction = 1 # Right.
+
+# Reference.
+@onready var footstepSound = $Audio/FootstepSound
+@onready var jumpSound = $Audio/JumpSound
+@onready var label = $Label
+@onready var coyoteTimer = $CoyoteTimer
+@onready var animationPlayer = $AnimationPlayer
+@onready var shootFlash = $Sprite2D/ShootFlash
+@onready var sprite2D = $Sprite2D
+@onready var shootTimer = $ShootTimer
 
 # Player states.
 var IS_MOVING: bool
 var IS_JUMPING: bool
 var IS_FALLING: bool
-var WITH_WEAPON: bool
 var IS_SHOOTING: bool
 var CAN_COYOTE_TIMER: bool = false
 var CAN_SHOOT: bool = true
 var TAKE_AMMO: bool
-var ON_PLATFORM: bool
 
 # Player signals.
 signal dropped_gun(direction)
@@ -31,15 +34,13 @@ signal shoot(direction)
 
 
 func _process(_delta):
-	WITH_WEAPON = Player.WITH_WEAPON
-	
-	if IS_MOVING and not $Audio/FootstepSound.playing and is_on_floor():
-		$Audio/FootstepSound.play()
+	if IS_MOVING and not footstepSound.playing and is_on_floor():
+		footstepSound.play()
 		
 	if TAKE_AMMO:
-		$Label.visible = true
+		label.visible = true
 	else:
-		$Label.visible = false
+		label.visible = false
 
 
 func _physics_process(delta):
@@ -55,22 +56,23 @@ func _physics_process(delta):
 	# Move the player.
 	move_and_slide()
 	
+	# limit for velocity in the y-axis.
 	if velocity.y < max_jump_speed:
 		velocity.y = max_jump_speed
 
 
 func movement(_delta):
-	# Jump if the player is on the floor.
+	# Player Jump.
 	if Input.is_action_just_pressed("jump") and (is_on_floor() or CAN_COYOTE_TIMER):
 		velocity.y = jump_speed
-		$Audio/AudioStreamPlayer.play()
+		jumpSound.play()
 		
 	# Player walk.
-	var direction = Input.get_axis("left_move","right_move")
-	velocity.x = direction * speed
+	var input_direction = Input.get_axis("left_move", "right_move")
+	velocity.x = input_direction * speed
 	
 	# Update player states.
-	IS_MOVING = bool(direction)
+	IS_MOVING = bool(input_direction) # input_direction = 0 = false
 	IS_JUMPING = not is_on_floor() and velocity.y < 0
 	IS_FALLING = not is_on_floor() and not IS_JUMPING
 	
@@ -81,42 +83,42 @@ func movement(_delta):
 	if IS_JUMPING:
 		CAN_COYOTE_TIMER = false
 	
-	if IS_FALLING and $CoyoteTimer.time_left == 0 and CAN_COYOTE_TIMER:
-		$CoyoteTimer.start()
+	if IS_FALLING and coyoteTimer.time_left == 0 and CAN_COYOTE_TIMER:
+		coyoteTimer.start()
 
 	# Changes the player animation according to the state.
-	change_animation(direction)
+	change_animation(input_direction)
 
 
 func change_animation(direction):
 	# checks if the player is armed.
 	var suffix = ""
-	if WITH_WEAPON:
-		suffix = "_gun"
+	if Player.WITH_WEAPON:
+		suffix = "_gun" # "animation" + "_gun"
 	
-	# Walking.
+	# Walking animation.
 	if IS_MOVING and not IS_FALLING and not IS_JUMPING:
-		$AnimationPlayer.current_animation = "walk" + suffix
+		animationPlayer.current_animation = "walk" + suffix
 		
-	# Idle and Falling.
+	# Idle and Falling animations.
 	if (not IS_MOVING or IS_FALLING) and not IS_SHOOTING:
-		$AnimationPlayer.current_animation = "idle" + suffix
+		animationPlayer.current_animation = "idle" + suffix
 		
 	# Jumping.
 	if IS_JUMPING:
-		$AnimationPlayer.current_animation = "jump" + suffix
+		animationPlayer.current_animation = "jump" + suffix
 	
 	# Shooting.
 	if IS_SHOOTING and (not IS_MOVING or IS_FALLING):
-		$AnimationPlayer.current_animation = "shooting"
+		animationPlayer.current_animation = "shooting"
 	
 	# Change ShootFlash position according to player direction.
-	$Sprite2D/ShootFlash.position.x = 15 * player_direction
+	shootFlash.position.x = 15 * player_direction
 	
 	# Flip animation.
 	if direction:
-		$Sprite2D.flip_h = bool(direction - 1)
-		$Sprite2D/ShootFlash.flip_h = bool(direction - 1)
+		sprite2D.flip_h = bool(direction - 1)
+		shootFlash.flip_h = bool(direction - 1)
 		player_direction = direction
 
 
@@ -133,9 +135,8 @@ func weapon_system():
 			
 			# Shoot when the ShootTimer is up
 			if CAN_SHOOT:
-				
 				CAN_SHOOT = false
-				$ShootTimer.start()
+				shootTimer.start()
 				shoot.emit(player_direction)
 		else:
 			IS_SHOOTING = false
@@ -143,9 +144,9 @@ func weapon_system():
 
 func checkFlashVisibility(IS_VISIBLE):
 	if IS_SHOOTING:
-		$Sprite2D/ShootFlash.visible = IS_VISIBLE
+		shootFlash.visible = IS_VISIBLE
 	else: 
-		$Sprite2D/ShootFlash.visible = false
+		shootFlash.visible = false
 
 
 func _on_coyote_timer_timeout():
