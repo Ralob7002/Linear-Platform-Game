@@ -1,2 +1,2 @@
 # Linear Platform Game
- A platform game made in Godot using Kenney Assets.
+ A platform game made in Godot using [Pixel Line Platformer](https://kenney.nl/assets/pixel-line-platformer) by **Kenney Assets** e others assets.
