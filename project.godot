@@ -87,12 +87,7 @@ take_item={
 
 [layer_names]
 
-2d_render/layer_1="Player"
-2d_render/layer_2="Tilemap"
-2d_render/layer_3="Item"
-2d_render/layer_4="Platform"
-2d_render/layer_5="Projectile"
-2d_render/layer_6="Directional"
+2d_render/layer_1="Particles"
 2d_physics/layer_1="Player"
 2d_physics/layer_2="Tilemap"
 2d_physics/layer_3="Item"

@@ -149,6 +149,11 @@ func checkFlashVisibility(IS_VISIBLE):
 		shootFlash.visible = false
 
 
+func toDie():
+	Player.reset()
+	get_tree().reload_current_scene()
+
+
 func _on_coyote_timer_timeout():
 	CAN_COYOTE_TIMER = false
 

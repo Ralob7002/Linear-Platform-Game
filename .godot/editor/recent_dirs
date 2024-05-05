@@ -1,8 +1,9 @@
-S:/Godot Projects/Linear-Platform-Game
-res://assets
+res://scripts/shaders
 res://scripts
+res://assets
+res://scenes/enemys
+S:/Godot Projects/Linear-Platform-Game
 res://scenes
-res://assets/themes
 res://gameData
 res://
 res://scenes/levels

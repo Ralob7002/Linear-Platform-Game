@@ -15,6 +15,10 @@ func _on_body_entered(body):
 	# Checks whether an item has entered the death zone.
 	elif body.collision_layer == 4: # Item layer.
 		body.queue_free()
+	
+	# Checks whether an enemy has entered the death zone.
+	elif body.collision_layer == 16: # Enemy layer.
+		body.queue_free()
 
 
 func _on_timer_timeout():

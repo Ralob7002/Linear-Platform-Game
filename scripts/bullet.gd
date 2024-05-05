@@ -27,13 +27,16 @@ func _physics_process(delta):
 	position.x += direction * speed * delta
 
 
-func _on_body_entered(_body):
+func _on_body_entered(body):
 	# Adds impact particle at bullet impact site.
 	var new_explosion = explosion.instantiate()
 	new_explosion.position = impactParticlePosition.global_position
 	new_explosion.ON_SCREEN = ON_SCREEN # If the bullet is on the visible screen.
 	get_parent().add_child(new_explosion) # Adds impact particle at current level.
 	queue_free()
+	
+	if not(body as TileMap) and body.collision_layer == 16: # Enemy.
+		body.takeDamage(1)
 
 
 func _on_death_timer_timeout():
