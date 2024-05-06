@@ -30,8 +30,6 @@ var life = max_life
 
 func _physics_process(delta):
 	if $VisibleOnScreenNotifier2D.is_on_screen():
-		print(name + " on")
-		
 		# Applies gravity.
 		velocity.y += gravity * delta
 		

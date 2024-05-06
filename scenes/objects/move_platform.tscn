@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://cqtv4hdnue4nu"]
 
-[ext_resource type="Script" path="res://scripts/move_platform.gd" id="1_u47u4"]
+[ext_resource type="Script" path="res://scripts/objects/move_platform.gd" id="1_u47u4"]
 [ext_resource type="Texture2D" uid="uid://dhdn6wmpjal2u" path="res://assets/tilemap.png" id="1_uo451"]
 [ext_resource type="AudioStream" uid="uid://byimlpuf6xrjm" path="res://assets/audio/move_platform.wav" id="3_382jr"]
 

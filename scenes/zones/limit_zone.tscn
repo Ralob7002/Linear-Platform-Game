@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://cr2ghq3db068t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j25d4"]
+size = Vector2(116, 4)
+
+[node name="LimitZone" type="Area2D"]
+collision_layer = 64
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1, 0.992558)
+shape = SubResource("RectangleShape2D_j25d4")
+debug_color = Color(0.268914, 0.632942, 0, 0.42)

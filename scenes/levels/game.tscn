@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://jywlumyl00m0"]
 
-[ext_resource type="Script" path="res://scripts/game.gd" id="1_4c40e"]
+[ext_resource type="Script" path="res://scripts/levels/game.gd" id="1_4c40e"]
 [ext_resource type="PackedScene" uid="uid://olswgjny0p2n" path="res://scenes/player/player.tscn" id="1_ss3gb"]
 [ext_resource type="PackedScene" uid="uid://c3hp1rae3hxuq" path="res://scenes/sky.tscn" id="2_j85w7"]
 [ext_resource type="PackedScene" uid="uid://be2mo8fnvkkqc" path="res://scenes/ui.tscn" id="2_qvcgf"]
@@ -34,6 +34,8 @@ metadata/_edit_lock_ = true
 
 [node name="Enemys" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
+
+[node name="Zones" type="Node2D" parent="."]
 
 [connection signal="dropped_gun" from="Player" to="." method="_on_player_dropped_gun"]
 [connection signal="shoot" from="Player" to="." method="_on_player_shoot"]

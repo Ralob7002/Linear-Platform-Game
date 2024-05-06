@@ -1,0 +1,123 @@
+[gd_scene load_steps=14 format=3 uid="uid://b6d720nq5xrmc"]
+
+[ext_resource type="Script" path="res://scripts/enemys/fly.gd" id="1_6ohdr"]
+[ext_resource type="Texture2D" uid="uid://dhdn6wmpjal2u" path="res://assets/tilemap.png" id="1_p6cex"]
+[ext_resource type="Texture2D" uid="uid://cvefrueymukkb" path="res://assets/Tiles/tile_0053.png" id="3_5ie5i"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ilhoo"]
+atlas = ExtResource("1_p6cex")
+region = Rect2(48, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_llluk"]
+atlas = ExtResource("1_p6cex")
+region = Rect2(64, 80, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o7nbd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ilhoo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_llluk")
+}],
+"loop": true,
+"name": &"flying",
+"speed": 7.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cskoe"]
+radius = 4.12311
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_63bkl"]
+size = Vector2(2, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o87gt"]
+size = Vector2(8, 8)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vdo4h"]
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 2
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_7lbp1"]
+_data = [Vector2(0.473282, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_isgl5"]
+curve = SubResource("Curve_7lbp1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6pfpf"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+angle_min = -95.0
+angle_max = 95.0
+direction = Vector3(0, -1, 0)
+spread = 15.0
+flatness = 0.43
+initial_velocity_min = 200.0
+initial_velocity_max = 200.0
+gravity = Vector3(0, 500, 0)
+alpha_curve = SubResource("CurveTexture_isgl5")
+anim_offset_max = 1.0
+
+[node name="Fly" type="CharacterBody2D"]
+collision_layer = 16
+collision_mask = 43
+script = ExtResource("1_6ohdr")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -1)
+sprite_frames = SubResource("SpriteFrames_o7nbd")
+animation = &"flying"
+autoplay = "flying"
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_cskoe")
+metadata/_edit_lock_ = true
+
+[node name="Detectors" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="WallDetect" type="Area2D" parent="Detectors"]
+position = Vector2(5, 0)
+collision_layer = 0
+collision_mask = 98
+input_pickable = false
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detectors/WallDetect"]
+shape = SubResource("RectangleShape2D_63bkl")
+
+[node name="PlayerDetect" type="Area2D" parent="Detectors"]
+collision_layer = 0
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detectors/PlayerDetect"]
+shape = SubResource("RectangleShape2D_o87gt")
+
+[node name="DeathParticle" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_vdo4h")
+emitting = false
+amount = 3
+process_material = SubResource("ParticleProcessMaterial_6pfpf")
+texture = ExtResource("3_5ie5i")
+one_shot = true
+explosiveness = 1.0
+metadata/_edit_lock_ = true
+
+[node name="DeathTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, -1.5)
+scale = Vector2(0.4, 0.55)
+
+[connection signal="area_entered" from="Detectors/WallDetect" to="." method="_on_wall_detect_area_entered"]
+[connection signal="body_entered" from="Detectors/WallDetect" to="." method="_on_wall_detect_body_entered"]
+[connection signal="body_entered" from="Detectors/PlayerDetect" to="." method="_on_player_detect_body_entered"]
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]

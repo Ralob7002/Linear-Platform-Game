@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://cplln8503x1tl"]
 
-[ext_resource type="Script" path="res://scripts/weapon.gd" id="1_dc4mm"]
+[ext_resource type="Script" path="res://scripts/items/weapon.gd" id="1_dc4mm"]
 [ext_resource type="Texture2D" uid="uid://dhdn6wmpjal2u" path="res://assets/tilemap.png" id="2_lhoti"]
 [ext_resource type="Texture2D" uid="uid://3hg11lnqe3nc" path="res://assets/Tiles/tile_0050.png" id="3_tq2fd"]
 [ext_resource type="AudioStream" uid="uid://dcwyneoe55m5i" path="res://assets/audio/break_weapon.mp3" id="4_0ey3b"]

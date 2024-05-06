@@ -1,9 +1,10 @@
-res://scripts/shaders
 res://scripts
-res://assets
 res://scenes/enemys
-S:/Godot Projects/Linear-Platform-Game
+res://assets
+res://scenes/zones
 res://scenes
+res://scripts/shaders
+S:/Godot Projects/Linear-Platform-Game
 res://gameData
 res://
 res://scenes/levels
