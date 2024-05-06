@@ -3,13 +3,13 @@
 [ext_resource type="PackedScene" uid="uid://jywlumyl00m0" path="res://scenes/levels/game.tscn" id="1_os74a"]
 [ext_resource type="Script" path="res://scripts/levels/level_1.gd" id="2_be7yt"]
 [ext_resource type="PackedScene" uid="uid://cplln8503x1tl" path="res://scenes/items/weapon.tscn" id="5_epuq7"]
-[ext_resource type="Texture2D" uid="uid://dhdn6wmpjal2u" path="res://assets/tilemap.png" id="5_p771s"]
+[ext_resource type="Texture2D" uid="uid://b4hagkrgoxc2y" path="res://assets/tilemap.png" id="5_p771s"]
 [ext_resource type="PackedScene" uid="uid://c4rd6vvu0h3uc" path="res://scenes/zones/death_zone.tscn" id="7_5ld1o"]
 [ext_resource type="PackedScene" uid="uid://b6d720nq5xrmc" path="res://scenes/enemys/fly.tscn" id="7_au03m"]
 [ext_resource type="PackedScene" uid="uid://cqtv4hdnue4nu" path="res://scenes/objects/move_platform.tscn" id="7_f5lrt"]
 [ext_resource type="PackedScene" uid="uid://cr2ghq3db068t" path="res://scenes/zones/limit_zone.tscn" id="8_dey1x"]
 [ext_resource type="PackedScene" uid="uid://bkjchesdxmhd0" path="res://scenes/enemys/worm.tscn" id="9_74sds"]
-[ext_resource type="FontFile" uid="uid://jvks7ddw8xlo" path="res://assets/fonts/kongtext.ttf" id="10_m0amq"]
+[ext_resource type="FontFile" uid="uid://dbokx3k5hjrgg" path="res://assets/fonts/kongtext.ttf" id="10_m0amq"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_jqljl"]
 polygon = PackedVector2Array(-8, -8, 8, -8, 8, -3.125, -8, -3)

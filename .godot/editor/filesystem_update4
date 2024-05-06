@@ -1,8 +1,1 @@
-res://scenes/levels/game.tscn
-res://scenes/enemys/worm.tscn
 res://scenes/levels/level_1.tscn
-res://scripts/worm.gd
-res://scripts/enemys/worm.gd
-res://scenes/enemys/fly.tscn
-res://scripts/enemys/fly.gd
-res://README.md
